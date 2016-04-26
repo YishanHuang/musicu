@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="searchpage">  
+        <form action="/search_track">
+        	<label>Search</label>
+        	<input type="text" name="name" placeholder="metal rock" class="name">
+ 			<input class="js_submit" type="submit" value="Songs">
+ 			<input class="js_submit" type="submit" value="Playlists" formaction="/search_playlists">
+ 		</form>
+  </div>
+
+
+{% endblock %}

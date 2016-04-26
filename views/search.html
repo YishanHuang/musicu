@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="keepsearch">
+	<form action="/search_track">
+    <label>Keep Searching</label>
+    <input type="text" name="name" placeholder="name" class="name">
+		<button class="js_submit" type="submit">Songs</button>
+		<button class="js_submit" type="submit" formaction="/search_playlists">Playlists</button>
+ 	</form>
+    </div>
+ <div id="container2">
+	{% if !err %}
+		<div id="search">
+
+
+			{% if tracks %}
+				<h2>Your search result </h2>
+				{% for t in tracks %}
+					<p>Track name : {{ t.name }} Album : {{ t.album.name }}</p>
+			<!-- 		<audio controls>
+						<source src="{{ t.preview_url }}" type="audio/ogg">
+						<source src="{{ t.preview_url}}" type="audio/mpeg">
+						Your browser does not support the audio element.
+					</audio> -->
+					<iframe src="https://embed.spotify.com/?uri={{ t.uri }}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+				{% endfor %}
+
+			{% elif playlist %}
+				
+				<iframe src="https://embed.spotify.com/?uri={{ playlist.uri }}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+			
+			{% endif %}
+		</div>
+
+		<div id="newsfeed" >
+		<div class="font-effect-shadow-multiple"><h3>Daily News</h3> </div>
+		{% for t in topics %}
+	        
+		<h5><a href="{{links[loop.index -1]}}">{{ t }} </a></h5>
+		
+
+		
+			<h2>{{ dates[loop.index -1 ] }}</h2>
+	    
+		{% endfor %}
+		</div>
+	{% else %}
+		<p> {{ err }} </p>
+		<div class="keepsearch">
+			<form action="/search_track">
+	    	<label>Keep Searching</label>
+	    	<input type="text" name="name" placeholder="name" class="name">
+			<button class="js_submit" type="submit">Songs</button>
+			<button class="js_submit" type="submit" formaction="/search_playlists">Playlists</button>
+	 		</form>
+    	</div>
+
+	{% endif %}
+ </div>
+{% endblock %}

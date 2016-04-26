@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Music Box</title>
+		<link href="/stylesheet/main.css" rel="stylesheet" type="text/css" />
+		<link href="/stylesheet/reset.css" rel="stylesheet" type="text/css" />
+		<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto&effect=shadow-multiple">
+	</head>
+	<body>
+
+		
+		{% if !user %}
+		<div id="login">
+			
+			
+			<a href="/auth/spotify">Login</a>
+			
+			</div>
+		{% else %}
+		<div id="login2">
+			<p>
+			<a href="/home">Home</a> 
+			<a href="/account">Search</a> 
+			<a href="/logout">Log Out</a> 
+			</p>
+			</div>
+
+		{% endif %}
+		{% block content %}
+
+		<div id="footer">
+         lisence
+		</div>
+	</body>
+</html>

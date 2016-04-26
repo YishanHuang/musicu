@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% if !user %}
+	<div id="header">
+	<h1>Welcome to Yishan & Shuyu's Music app!</h1>
+	<h4>This is an app with <img src="image/spotify-logo.jpg" height="30px">. </h4>
+	</div>
+{% else %}
+  <div id="container">
+	<div id="profile">
+	<img src="{{ user.photos }}" />
+	<h2>Hello, {{ user.displayName }}.</h2>
+	<p id="bday"></p>
+	<script>
+		var bday = new Date(" {{ user._json.birthdate }}");
+		bday.setYear(2016)
+		var today = new Date()
+		var timeDiff = Math.abs(bday.getTime() - today.getTime());
+		var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+		document.getElementById('bday').innerHTML = "Your next birthday is in "+ diffDays + " days" 
+	</script>
+
+	<p> Check out today's top hit</p>
+	<iframe src="https://embed.spotify.com/?uri={{ song.uri }}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+	<p> You have {{ user.followers }} followers.</p>
+	 </div>
+
+	<div id="topArtists">
+	<p> Your recent favourite artists are: </p>
+	{% for a in topArtists %}
+		 <img src="{{ a.images[0].url }}" width='150' height='150' />
+	{% endfor %}
+	</div>
+  </div>
+	<div id="footer">
+         
+		</div>
+	
+{% endif %}
+{% endblock %}
